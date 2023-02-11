@@ -1,0 +1,51 @@
+﻿@using MyWebApplication.Models
+@model Client
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset='utf-8'>
+    <link href="~/css/style.css" rel="stylesheet" />
+    <title>Page Title</title>
+</head>
+<body>
+    <div>
+        <table border="1">
+            <tr>
+                <td>Id</td>
+                <td>@Model.Id</td>
+            </tr>
+
+            <tr>
+                <td>Фамилия</td>
+                <td>@Model.Surname</td>
+            </tr>
+
+            <tr>
+                <td>Имя</td>
+                <td>@Model.Name</td>
+            </tr>
+
+            <tr>
+                <td>Очество</td>
+                <td>@Model.Patronymic</td>
+            </tr>
+
+            <tr>
+                <td>Номер телефона</td>
+                <td>@Model.NumberPhone</td>
+            </tr>
+
+            <tr>
+                <td>Адрес</td>
+                <td>@Model.Adress</td>
+            </tr>
+
+            <tr>
+                <td>Описание</td>
+                <td>@Model.Description</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

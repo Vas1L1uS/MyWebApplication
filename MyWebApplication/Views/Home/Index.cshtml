@@ -1,0 +1,43 @@
+﻿@using MyWebApplication.Infrastructure
+@using MyWebApplication.Models
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset='utf-8'>
+    <link href="~/css/style.css" rel="stylesheet"/>
+    <title>Page Title</title>
+</head>
+<body>
+    <div>
+        <table border="1">
+            <tr class="headerTable">
+                <td>Id</td>
+                <td>Фамилия</td>
+                <td>Имя</td>
+                <td>Очество</td>
+            </tr>
+
+            @{
+                LoadJson loadJson = new LoadJson();
+                List<Client> clients = loadJson.Load();
+                ClientList_s.clients = clients;
+            }
+
+            @foreach (var item in clients)
+            {
+                <tr>
+                    <td>
+                        <a asp-controller="Home" asp-action="ClientData" asp-route-id="@item.Id">@item.Id</a>
+                    </td>
+                    <td>@item.Surname</td>
+                    <td>@item.Name</td>
+                    <td>@item.Patronymic</td>
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>
