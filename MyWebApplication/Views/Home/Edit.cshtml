@@ -1,0 +1,31 @@
+﻿@namespace MyWebApplication.Entities
+@model Client
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>Изменить</title>
+</head>
+<body>
+    <div>
+        <form action="~/Home/EditClientDB" method="post">
+            <p hidden="hidden"><input type="number" name="id" value="@Model.Id" /></p>
+            <label>Фамилия</label><br />
+            <input type="text" name="surname" value="@Model.Surname"/><br />
+            <label>Имя</label><br />
+            <input type="text" name="name" value="@Model.Name" /><br />
+            <label>Отчество</label><br />
+            <input type="text" name="patronymic" value="@Model.Patronymic" /><br />
+            <label>Телефон</label><br />
+            <input type="number" name="numberPhone" value="@Model.NumberPhone" /><br />
+            <label>Адрес</label><br />
+            <input type="text" name="adress" value="@Model.Adress" /><br />
+            <label>Описание</label><br />
+            <input type="text" name="description" value="@Model.Description" /><br />
+            <p><input type="submit" value="Изменить" /></p>
+        </form>
+        <a href="~/Home/Delete?=@Model.Id">Удалить</a>
+    </div>
+</body>
+</html>

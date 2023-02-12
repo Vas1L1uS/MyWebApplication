@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System;
-using MyWebApplication.Models;
+using MyWebApplication.Entities;
 using System.IO;
 using System.Linq;
 
@@ -22,7 +22,7 @@ namespace MyWebApplication.Infrastructure
 
                 foreach (var item in jArrayClients)
                 {
-                    uint id = item["id"].ToObject<uint>();
+                    long id = item["id"].ToObject<long>();
                     string surname = item["surname"].ToObject<string>();
                     string name = item["name"].ToObject<string>();
                     string patronymic = item["patronymic"].ToObject<string>();

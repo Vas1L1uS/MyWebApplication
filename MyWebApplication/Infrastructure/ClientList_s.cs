@@ -1,4 +1,6 @@
-﻿using MyWebApplication.Models;
+﻿using MyWebApplication.Exceptions;
+using MyWebApplication.Entities;
+using System;
 using System.Collections.Generic;
 
 namespace MyWebApplication.Infrastructure
@@ -7,7 +9,7 @@ namespace MyWebApplication.Infrastructure
     {
         static public List<Client> clients;
 
-        static public Client GetClientById(uint id)
+        static public Client GetClientById(long id)
         {
             foreach (var item in clients)
             {
@@ -16,8 +18,7 @@ namespace MyWebApplication.Infrastructure
                     return item;
                 }
             }
-
-            return null;
+            throw new NullRefExc($"Клиент с номером id {id} не найден!");
         }
     }
 }

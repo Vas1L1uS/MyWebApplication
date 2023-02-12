@@ -52,3 +52,5 @@ C:\MyFolders\GitHub\MyWebApplication\MyWebApplication\obj\Debug\netcoreapp2.1\My
 C:\MyFolders\GitHub\MyWebApplication\MyWebApplication\obj\Debug\netcoreapp2.1\MyWebApplication.pdb
 C:\MyFolders\GitHub\MyWebApplication\MyWebApplication\obj\Debug\netcoreapp2.1\MyWebApplication.genruntimeconfig.cache
 C:\MyFolders\GitHub\MyWebApplication\MyWebApplication\obj\Debug\netcoreapp2.1\MyWebApplication.csproj.CopyComplete
+C:\MyFolders\GitHub\MyWebApplication\MyWebApplication\obj\Debug\netcoreapp2.1\Razor\Views\Home\Add.cshtml.g.cs
+C:\MyFolders\GitHub\MyWebApplication\MyWebApplication\obj\Debug\netcoreapp2.1\Razor\Views\Home\Edit.cshtml.g.cs
