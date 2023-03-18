@@ -1,17 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MyWebApplication.Entities;
 
-namespace MyWebApplication.Contexts
+namespace AccountLib
 {
-    public class ClientContext : DbContext
+    public class UserContext : DbContext
     {
-        public DbSet<Client> Clients { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(
               @"Server=(localdb)\MSSQLLocalDB;
-                DataBase=_Clients;
+                DataBase=Users;
                 Trusted_Connection=True;"
             );
         }

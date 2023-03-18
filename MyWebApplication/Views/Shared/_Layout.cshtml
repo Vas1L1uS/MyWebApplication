@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewData["Title"]</title>
+</head>
+
+<body class="container">
+    <style>
+        body {
+            background-image: url('../background.jpg');
+        }
+    </style>
+    <header>
+        <style>
+            .fas {
+                border: 2px solid #9980D3;
+                font-size: 30px;
+            }
+            .ppp{
+                margin-left: 70px;
+            }
+        </style>
+        <div class="fas">
+        @if (!User.Identity.IsAuthenticated)
+        {
+                <a href="~/Account/Register">
+                Регистрация</a>
+            <a class="ppp" href="~/Account/Login">Вход</a>
+        }
+        @if (User.Identity.IsAuthenticated)
+        {
+                <form method="post" asp-controller="Account" asp-action="Logout" id="logoutform" asp-antiforgery="true">
+                    <a class="navbar-brand" href="#" onclick="document.getElementById('logoutform').submit()">Выход</a>
+                </form>
+        }
+        @if (User.IsInRole("Admin"))
+        {
+                <a class="navbar-brand" href="~/Admin/Users">Пользователи</a>
+        }
+        </div>
+        <p></p>
+    </header>
+
+    <div class="container">
+        @RenderBody()
+    </div>
+    <style>
+        .container {
+            padding-top: 10px;
+        }
+
+        .validation-summary-errors {
+            color: #f00;
+        }
+    </style>
+</body>
+</html>

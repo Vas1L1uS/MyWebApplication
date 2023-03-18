@@ -3,6 +3,11 @@
 
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
+@{
+    ViewData["Title"] = "Клиенты";
+    Layout = "_Layout";
+}
+
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -24,7 +29,7 @@
 
             @foreach (Client item in ViewBag.Clients)
             {
-                <tr>
+                <tr style="background: azure">
                     <td>
                         <a asp-controller="Home" asp-action="ClientData" asp-route-id="@item.Id">@item.Id</a>
                     </td>

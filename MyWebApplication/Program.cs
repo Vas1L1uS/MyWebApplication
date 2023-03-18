@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+using MyWebApplication.Data;
+using MyWebApplication.DataContext;
+using Microsoft.Extensions.Logging;
+using MyWebApplication.Data;
 
 namespace MyWebApplication
 {
@@ -14,11 +13,24 @@ namespace MyWebApplication
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            var init = BuildWebHost(args);
+
+            using (var scope = init.Services.CreateScope())
+            {
+                var s = scope.ServiceProvider;
+                var c = s.GetRequiredService<UserContext>();
+                DbInitializer.Initialize(c);
+            }
+
+            init.Run();
+
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+        public static IWebHost BuildWebHost(string[] args) =>
+
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+                .UseStartup<Startup>()
+                .ConfigureLogging(log => log.AddConsole())
+                .Build();
     }
 }

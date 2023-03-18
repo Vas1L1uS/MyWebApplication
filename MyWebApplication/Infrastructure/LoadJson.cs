@@ -22,7 +22,7 @@ namespace MyWebApplication.Infrastructure
 
                 foreach (var item in jArrayClients)
                 {
-                    long id = item["id"].ToObject<long>();
+                    int id = item["id"].ToObject<int>();
                     string surname = item["surname"].ToObject<string>();
                     string name = item["name"].ToObject<string>();
                     string patronymic = item["patronymic"].ToObject<string>();
