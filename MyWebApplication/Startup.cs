@@ -32,8 +32,7 @@ namespace MyWebApplication
 
             #region //
 
-            services.AddIdentity<User, IdentityRole>()
-                .AddEntityFrameworkStores<UserContext>()
+            services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<UserContext>()
                 .AddDefaultTokenProviders();
 
             services.Configure<IdentityOptions>(options =>

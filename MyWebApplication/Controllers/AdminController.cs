@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
@@ -32,24 +33,16 @@ namespace MyWebApplication.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public async Task<IActionResult> Add(UserRegistration model)
+        public IActionResult Add(UserRegistration model)
         {
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = model.LoginProp };
-                var createResult = await _userManager.CreateAsync(user, model.Password);
-
-                if (createResult.Succeeded)
+                bool result = _clientDataApi.AddUser(model);
+                if (result)
                 {
                     return RedirectToAction("Index", "Home");
                 }
-                else//иначе
-                {
-                    foreach (var identityError in createResult.Errors)
-                    {
-                        ModelState.AddModelError("", identityError.Description);
-                    }
-                }
+                ModelState.AddModelError("", "Логин занят!");
             }
 
             return View(model);

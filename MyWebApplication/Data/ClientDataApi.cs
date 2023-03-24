@@ -80,6 +80,35 @@ namespace MyWebApplication.Data
             return JsonConvert.DeserializeObject<IEnumerable<User>>(json);
         }
 
+        public bool AddUser(UserRegistration user)
+        {
+            string url = @"https://localhost:44306/api/home/AddUser";
+
+            var r = httpClient.PostAsync(
+                requestUri: url,
+                content: new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8,
+                mediaType: "application/json")
+            ).Result;
+
+            if (r.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public string GetUserRole(User user)
+        {
+            string url = @"https://localhost:44306/api/home/GetUserRole";
+
+            string json = httpClient.GetStringAsync(url).Result;
+
+            return JsonConvert.DeserializeObject<string>(json);
+        }
+
         public void DeleteUser(string id)
         {
             string url = $"https://localhost:44306/api/home/DeleteUser/{id}";

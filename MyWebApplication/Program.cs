@@ -13,24 +13,11 @@ namespace MyWebApplication
     {
         public static void Main(string[] args)
         {
-            var init = BuildWebHost(args);
-
-            using (var scope = init.Services.CreateScope())
-            {
-                var s = scope.ServiceProvider;
-                var c = s.GetRequiredService<UserContext>();
-                DbInitializer.Initialize(c);
-            }
-
-            init.Run();
-
+            CreateWebHostBuilder(args).Build().Run();
         }
 
-        public static IWebHost BuildWebHost(string[] args) =>
-
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>()
-                .ConfigureLogging(log => log.AddConsole())
-                .Build();
+                .UseStartup<Startup>();
     }
 }

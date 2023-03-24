@@ -6,6 +6,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MyWebApplication.AuthClientApp;
 using Microsoft.Extensions.Logging;
+using MyWebApplication.Data;
+using MyWebApplication.Entities;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using System.Security.Claims;
 
 namespace MyWebApplication.Controllers
 {
@@ -15,14 +20,16 @@ namespace MyWebApplication.Controllers
         private readonly ILogger log;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly ClientDataApi _clientDataApi;
 
-        public AccountController(UserManager<User> userManager,
+        public AccountController(ClientDataApi clientDataApi, UserManager<User> userManager,
                                 SignInManager<User> signInManager,
                                 ILoggerFactory Log)
         {
             this.log = Log.CreateLogger(">>> Мой Logger ");
             _userManager = userManager;
             _signInManager = signInManager;
+            _clientDataApi = clientDataApi;
         }
 
         [HttpGet]
@@ -102,5 +109,17 @@ namespace MyWebApplication.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        private async Task Authenticate(string userName)
+        {
+            // создаем один claim
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimsIdentity.DefaultNameClaimType, userName)
+            };
+            // создаем объект ClaimsIdentity
+            ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
+            // установка аутентификационных куки
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
+        }
     }
 }
